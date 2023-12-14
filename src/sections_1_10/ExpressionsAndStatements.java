@@ -3,16 +3,280 @@ package sections_1_10;
 public class ExpressionsAndStatements {
     public static void main(String[] args) {
 
-        //printYearsAndDays(561600);
-        //System.out.println(hasTeen(9, 99, 29));
-        //System.out.println(areEqualByThreeDecimalPlaces(-3.123, 3.123));
-        //System.out.println(isLeapYear(2100));
-        //System.out.println(shouldWakeUp(true, 24));
-        //printMegaBytesAndKiloBytes(5000);
-        //printConversion(-5.6);
-        //checkNumber(-11);
     }
+    public static boolean canPack(int bigCount, int smallCount, int goal) {
+        if ((bigCount < 0) || (smallCount < 0) || (goal < 0) || (goal > bigCount * 5 + smallCount)) {
+            return false;
+        }
+        if (goal / 5 <= bigCount) {
+            if (goal % 5 <= smallCount) {
+                return true;
+            }
+        } else if ((goal / 5 - bigCount) * 5 + (goal % 5) <= smallCount) {
+                return true;
+            }
+        return false;
+    }
+    public static void numberToWords(int number) {
 
+        if (number == 0) {
+            System.out.println("Zero");
+            return;
+        }
+        if (number > 0) {
+            int reversedNumber = reverse(number);
+            int trailingZeros = getDigitCount(number) - getDigitCount(reversedNumber);
+            while (reversedNumber > 0) {
+                switch (reversedNumber % 10) {
+                    case 0:
+                        System.out.println("Zero");
+                        break;
+                    case 1:
+                        System.out.println("One");
+                        break;
+                    case 2:
+                        System.out.println("Two");
+                        break;
+                    case 3:
+                        System.out.println("Three");
+                        break;
+                    case 4:
+                        System.out.println("Four");
+                        break;
+                    case 5:
+                        System.out.println("Five");
+                        break;
+                    case 6:
+                        System.out.println("Six");
+                        break;
+                    case 7:
+                        System.out.println("Seven");
+                        break;
+                    case 8:
+                        System.out.println("Eight");
+                        break;
+                    case 9:
+                        System.out.println("Nine");
+                        break;
+                }
+                reversedNumber /= 10;
+            }
+
+            for (int i = 0; i < trailingZeros; i++) {
+                System.out.println("Zero");
+            }
+            return;
+        }
+        System.out.println("Invalid Value");
+    }
+    public static int reverse(int number) {
+        int reverse = 0;
+        boolean negativeNumber = false;
+        if (number < 0) {
+            number *= -1;
+            negativeNumber = true;
+        }
+        while (number > 0) {
+            reverse = reverse * 10 + number % 10;
+            number /= 10;
+        }
+        return negativeNumber ? reverse * -1 : reverse;
+    }
+    public static int getDigitCount(int number) {
+        if (number == 0) {
+            return 1;
+        }
+        if (number > 0) {
+            int count = 0;
+            while (number > 0) {
+                count++;
+                number /= 10;
+            }
+            return count;
+        }
+        return -1;
+    }
+    public static boolean isPerfectNumber(int number) {
+        if (number >= 1) {
+            int sumOfDivisors = 0;
+            for (int i = 1; i <= number / 2; i++) {
+                if (number % i == 0) {
+                    sumOfDivisors += i;
+                }
+            }
+            return sumOfDivisors == number;
+        }
+        return false;
+    }
+    public static int getGreatestCommonDivisor(int first, int second) {
+
+        if (first >= 10 && second >= 10) {
+            int greatestCommonDivisor = 0;
+            int smallerNumber = Math.min(first, second);
+
+            for (int i = 1; i <= smallerNumber; i++) {
+                if ((first % i == 0) && (second % i == 0)) {
+                    greatestCommonDivisor = i;
+                }
+            }
+            return greatestCommonDivisor;
+        }
+        return -1;
+    }
+    public static void printFactors(int number) {
+        if (number >= 1) {
+            for (int i = 1; i <= number / 2; i++) {
+                if (number % i == 0) {
+                    System.out.println(i);
+                }
+            }
+            System.out.println(number);
+        } else {
+            System.out.println("Invalid Value");
+        }
+    }
+    public static boolean hasSameLastDigit(int a, int b, int c) {
+        if (isValid(a) && isValid(b) && isValid(c)) {
+            return (a % 10 == b % 10) || (a % 10 == c % 10) || (b % 10 == c % 10);
+        }
+        return false;
+    }
+    public static boolean isValid(int number) {
+        return number >= 10 && number <= 1000;
+    }
+    public static boolean hasSharedDigit(int a, int b) {
+        if ((a >= 10 && a <= 99) && (b >= 10 && b <= 99)) {
+            return (a / 10 == b / 10) ||
+                (a % 10 == b / 10) ||
+                (a / 10 == b % 10) ||
+                (a % 10 == b % 10);
+            }
+        return false;
+    }
+    public static int getEvenDigitSum(int number) {
+        if (number >= 0) {
+            int sum = 0;
+            while (number > 0) {
+                if (number % 2 == 0) {
+                    sum += number % 10;
+                }
+                number /= 10;
+            }
+            return sum;
+        }
+        return -1;
+    }
+    public static int sumFirstAndLastDigit(int number) {
+        if (number >= 0) {
+            int sum = number % 10;
+            while (number > 0) {
+                if (number < 10) {
+                    sum += number;
+                }
+                number /= 10;
+            }
+            return sum;
+        }
+        return -1;
+    }
+    public static int sumFirstAndLastDigitMyVersion(int number) {
+        if (number >= 0) {
+            int sum = number % 10;
+            number /= 10;
+            while (number > 10) {
+                number /= 10;
+            }
+            sum += number;
+            return sum;
+        }
+        return -1;
+    }
+    public static boolean isPalindrome(int number) {
+
+        if (number < 0) {
+            number *= -1;
+        }
+        int initial = number;
+        int reverse = 0;
+
+        while (number > 0) {
+            reverse = (int) (reverse * 10 + number % 10);
+            number /= 10;
+        }
+        return initial == reverse;
+    }
+    public static boolean isOdd(int number) {
+
+        if (number > 0) {
+            if (number % 2 == 1) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public static int sumOdd(int start, int end) {
+
+        int sum = 0;
+        if (start > 0 && end > 0 && end >= start) {
+            for (int i = start; i <= end ; i++) {
+                if(isOdd(i)) {
+                    sum += i;
+                }
+            }
+            return sum;
+        }
+        return -1;
+    }
+    public static int getDaysInMonth(int month, int year) {
+        if((month >= 1 && month <= 12) && (year >= 1 && year <= 9999)) {
+            switch (month) {
+                case 1, 3, 5, 7, 8, 10, 12:
+                    return 31;
+                case 4, 6, 9, 11:
+                    return 30;
+                case 2:
+                    return isLeapYear(year) ? 29 : 28;
+            }
+        }
+        return -1;
+    }
+    public static void printNumberInWord(int number) {
+        switch (number) {
+            case 0:
+                System.out.println("ZERO");
+                break;
+            case 1:
+                System.out.println("ONE");
+                break;
+            case 2:
+                System.out.println("TWO");
+                break;
+            case 3:
+                System.out.println("THREE");
+                break;
+            case 4:
+                System.out.println("FOUR");
+                break;
+            case 5:
+                System.out.println("FIVE");
+                break;
+            case 6:
+                System.out.println("SIX");
+                break;
+            case 7:
+                System.out.println("SEVEN");
+                break;
+            case 8:
+                System.out.println("EIGHT");
+                break;
+            case 9:
+                System.out.println("NINE");
+                break;
+            default:
+                System.out.println("OTHER");
+                break;
+        }
+    }
     public static boolean isCatPlaying(boolean summer, int temperature) {
 
         if (summer) {
