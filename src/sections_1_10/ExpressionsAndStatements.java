@@ -1,9 +1,114 @@
 package sections_1_10;
 
+import java.util.Scanner;
+
 public class ExpressionsAndStatements {
     public static void main(String[] args) {
 
     }
+
+    public static int getBucketCount(double area, double areaPerBucket) {
+
+        if (area > 0 && areaPerBucket > 0) {
+
+            double diff = area / areaPerBucket;
+            return (int) (diff % 1 == 0 ? diff : diff + 1);
+        }
+        return -1;
+    }
+
+    public static int getBucketCount(double width, double height, double areaPerBucket) {
+
+        if (width > 0 && height > 0 && areaPerBucket > 0) {
+
+            double diff = width * height / areaPerBucket;
+            return (int) (diff % 1 == 0 ? diff : diff + 1);
+        }
+        return -1;
+    }
+
+    public static int getBucketCount(double width, double height, double areaPerBucket, int extraBuckets) {
+
+        if (width > 0 && height > 0 && areaPerBucket > 0 && extraBuckets >= 0) {
+
+            double diff = width * height / areaPerBucket - extraBuckets;
+            return (int) (diff % 1 == 0 ? diff : diff + 1);
+        }
+        return -1;
+    }
+
+    public static void inputThenPrintSumAndAverage() {
+
+        int sum = 0, count = 0, input = 0;
+        long avg = 0;
+
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            try {
+                System.out.println("Please enter an integer number: ");
+                input = scanner.nextInt();
+                sum += input;
+                count++;
+            } catch (Exception e) {
+                if (count > 0) {
+                    avg = Math.round((double)sum / count);
+                }
+                break;
+            }
+        }
+        System.out.println("SUM = " + sum + " AVG = " + avg);
+        scanner.close();
+    }
+
+    public static void printSquareStar(int number) {
+        if (number >= 5) {
+            for (int i = 0; i < number; i++) {
+                for (int j = 0; j < number; j++) {
+                    if ((i == 0) || (i == number - 1) || (j == 0) || (j == number - 1) || (i == j) || (i == number - 1 - j)) {
+                        System.out.print("*");
+                    } else {
+                        System.out.print(" ");
+                    }
+                }
+                System.out.println("");
+            }
+        } else {
+            System.out.println("Invalid Value");
+        }
+    }
+
+    public static int getLargestPrime(int number) {
+
+        if (number > 1) {
+            int originalNumber = number;
+            int result = originalNumber;
+            for (int i = 2; i <= originalNumber / 2; i++) {
+                if (number % i == 0) {
+                    result = i;
+                    while (number % i == 0) {
+                        number /= i;
+                    }
+                }
+            }
+            return result;
+        }
+        return -1;
+    }
+
+    public static int getLargestPrimeMyVersion(int number) {
+        if (number >= 1) {
+            for (int i = number / 2; i > 1; i--) {
+                if (number % i == 0) {
+                    if (getLargestPrime(i) == -1) {
+                        return i;
+                    }
+                }
+            }
+        }
+        return -1;
+    }
+
     public static boolean canPack(int bigCount, int smallCount, int goal) {
         if ((bigCount < 0) || (smallCount < 0) || (goal < 0) || (goal > bigCount * 5 + smallCount)) {
             return false;
@@ -13,10 +118,11 @@ public class ExpressionsAndStatements {
                 return true;
             }
         } else if ((goal / 5 - bigCount) * 5 + (goal % 5) <= smallCount) {
-                return true;
-            }
+            return true;
+        }
         return false;
     }
+
     public static void numberToWords(int number) {
 
         if (number == 0) {
@@ -69,6 +175,7 @@ public class ExpressionsAndStatements {
         }
         System.out.println("Invalid Value");
     }
+
     public static int reverse(int number) {
         int reverse = 0;
         boolean negativeNumber = false;
@@ -82,6 +189,7 @@ public class ExpressionsAndStatements {
         }
         return negativeNumber ? reverse * -1 : reverse;
     }
+
     public static int getDigitCount(int number) {
         if (number == 0) {
             return 1;
@@ -96,6 +204,7 @@ public class ExpressionsAndStatements {
         }
         return -1;
     }
+
     public static boolean isPerfectNumber(int number) {
         if (number >= 1) {
             int sumOfDivisors = 0;
@@ -108,6 +217,7 @@ public class ExpressionsAndStatements {
         }
         return false;
     }
+
     public static int getGreatestCommonDivisor(int first, int second) {
 
         if (first >= 10 && second >= 10) {
@@ -123,6 +233,7 @@ public class ExpressionsAndStatements {
         }
         return -1;
     }
+
     public static void printFactors(int number) {
         if (number >= 1) {
             for (int i = 1; i <= number / 2; i++) {
@@ -135,24 +246,28 @@ public class ExpressionsAndStatements {
             System.out.println("Invalid Value");
         }
     }
+
     public static boolean hasSameLastDigit(int a, int b, int c) {
         if (isValid(a) && isValid(b) && isValid(c)) {
             return (a % 10 == b % 10) || (a % 10 == c % 10) || (b % 10 == c % 10);
         }
         return false;
     }
+
     public static boolean isValid(int number) {
         return number >= 10 && number <= 1000;
     }
+
     public static boolean hasSharedDigit(int a, int b) {
         if ((a >= 10 && a <= 99) && (b >= 10 && b <= 99)) {
             return (a / 10 == b / 10) ||
-                (a % 10 == b / 10) ||
-                (a / 10 == b % 10) ||
-                (a % 10 == b % 10);
-            }
+                    (a % 10 == b / 10) ||
+                    (a / 10 == b % 10) ||
+                    (a % 10 == b % 10);
+        }
         return false;
     }
+
     public static int getEvenDigitSum(int number) {
         if (number >= 0) {
             int sum = 0;
@@ -166,6 +281,7 @@ public class ExpressionsAndStatements {
         }
         return -1;
     }
+
     public static int sumFirstAndLastDigit(int number) {
         if (number >= 0) {
             int sum = number % 10;
@@ -179,6 +295,7 @@ public class ExpressionsAndStatements {
         }
         return -1;
     }
+
     public static int sumFirstAndLastDigitMyVersion(int number) {
         if (number >= 0) {
             int sum = number % 10;
@@ -191,6 +308,7 @@ public class ExpressionsAndStatements {
         }
         return -1;
     }
+
     public static boolean isPalindrome(int number) {
 
         if (number < 0) {
@@ -205,6 +323,7 @@ public class ExpressionsAndStatements {
         }
         return initial == reverse;
     }
+
     public static boolean isOdd(int number) {
 
         if (number > 0) {
@@ -214,12 +333,13 @@ public class ExpressionsAndStatements {
         }
         return false;
     }
+
     public static int sumOdd(int start, int end) {
 
         int sum = 0;
         if (start > 0 && end > 0 && end >= start) {
-            for (int i = start; i <= end ; i++) {
-                if(isOdd(i)) {
+            for (int i = start; i <= end; i++) {
+                if (isOdd(i)) {
                     sum += i;
                 }
             }
@@ -227,8 +347,9 @@ public class ExpressionsAndStatements {
         }
         return -1;
     }
+
     public static int getDaysInMonth(int month, int year) {
-        if((month >= 1 && month <= 12) && (year >= 1 && year <= 9999)) {
+        if ((month >= 1 && month <= 12) && (year >= 1 && year <= 9999)) {
             switch (month) {
                 case 1, 3, 5, 7, 8, 10, 12:
                     return 31;
@@ -240,6 +361,7 @@ public class ExpressionsAndStatements {
         }
         return -1;
     }
+
     public static void printNumberInWord(int number) {
         switch (number) {
             case 0:
@@ -277,6 +399,7 @@ public class ExpressionsAndStatements {
                 break;
         }
     }
+
     public static boolean isCatPlaying(boolean summer, int temperature) {
 
         if (summer) {
@@ -290,6 +413,7 @@ public class ExpressionsAndStatements {
         }
         return false;
     }
+
     public static void printEqual(int a, int b, int c) {
         if (a >= 0 && b >= 0 && c >= 0) {
             if (a == b && b == c) {
@@ -303,6 +427,7 @@ public class ExpressionsAndStatements {
             System.out.println("Invalid Value");
         }
     }
+
     public static void printYearsAndDays(long minutes) {
 
         if (minutes >= 0) {
@@ -313,35 +438,42 @@ public class ExpressionsAndStatements {
             System.out.println("Invalid Value");
         }
     }
+
     public static double area(double radius) {
         if (radius >= 0) {
             return Math.PI * Math.pow(radius, 2);
         }
         return -1.0;
     }
+
     public static double area(double x, double y) {
         if (x >= 0 && y >= 0) {
             return x * y;
         }
         return -1.0;
     }
+
     public static boolean isTeen(int a) {
         return (a >= 13 && a <= 19);
     }
+
     public static boolean hasTeen(int a, int b, int c) {
         if ((a >= 13 && a <= 19) || (b >= 13 && b <= 19) || (c >= 13 && c <= 19)) {
             return true;
         }
         return false;
     }
+
     public static boolean hasEqualSum(int a, int b, int c) {
         return a + b == c;
     }
+
     public static boolean areEqualByThreeDecimalPlaces(double a, double b) {
         //System.out.println(Math.round((int)(a * 1000)));
         //System.out.println(Math.round((int)(b * 1000)));
-        return Math.round((int)(a * 1000)) == Math.round((int)(b * 1000));
+        return Math.round((int) (a * 1000)) == Math.round((int) (b * 1000));
     }
+
     public static boolean isLeapYear(int year) {
         if (year >= 1 && year <= 9999) {
             if (year % 4 == 0) {
@@ -354,6 +486,7 @@ public class ExpressionsAndStatements {
         }
         return false;
     }
+
     public static boolean shouldWakeUp(boolean barking, int hourOfDay) {
         if (barking) {
             if ((hourOfDay >= 0 && hourOfDay < 8) || (hourOfDay == 23)) {
@@ -362,6 +495,7 @@ public class ExpressionsAndStatements {
         }
         return false;
     }
+
     public static void printMegaBytesAndKiloBytes(int kiloBytes) {
 
         if (kiloBytes < 0) {
@@ -373,6 +507,7 @@ public class ExpressionsAndStatements {
             System.out.println(kiloBytes + " KB = " + megaBytes + " MB and " + remainder + " KB");
         }
     }
+
     public static long toMilesPerHour(double kilometersPerHour) {
 
         long milesPerHour;
@@ -383,6 +518,7 @@ public class ExpressionsAndStatements {
         }
         return milesPerHour;
     }
+
     public static void printConversion(double kilometersPerHour) {
         if (kilometersPerHour < 0) {
             System.out.println("Invalid Value");
@@ -390,6 +526,7 @@ public class ExpressionsAndStatements {
             System.out.println(kilometersPerHour + " km/h = " + toMilesPerHour(kilometersPerHour) + " mi/h");
         }
     }
+
     public static void checkNumber(int number) {
         String result = "";
         if (number > 0) {
