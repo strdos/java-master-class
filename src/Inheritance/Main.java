@@ -3,19 +3,18 @@ package Inheritance;
 public class Main {
     public static void main(String[] args) {
 
-        Customer customer = new Customer();
-        System.out.println(customer.getName());
-        System.out.println(customer.getCreditLimit());
-        System.out.println(customer.getEmail());
+        SalariedEmployee salariedEmployee = new SalariedEmployee("Adam", "2000", "2025", "2020", 50000.00, false);
+        salariedEmployee.getAge();
+        salariedEmployee.collectPay();
+        salariedEmployee.retire();
+        System.out.println(salariedEmployee);
 
-        Customer customer1 = new Customer("John", 500000, "johnn@abc.com");
-        System.out.println(customer1.getName());
-        System.out.println(customer1.getCreditLimit());
-        System.out.println(customer1.getEmail());
+        SalariedEmployee salariedEmployee1 = new SalariedEmployee("Brad", "2000", "2025", "2020", 50000.00, false);
+        System.out.println(salariedEmployee1);
+        salariedEmployee1.collectPay();
 
-        Customer customer2 = new Customer("Linda", "lindaa@abc.com");
-        System.out.println(customer2.getName());
-        System.out.println(customer2.getCreditLimit());
-        System.out.println(customer2.getEmail());
+        Worker worker = new Worker("Cecilia", "2020", "2025");
+        System.out.println(worker);
+        worker.collectPay();
     }
 }
