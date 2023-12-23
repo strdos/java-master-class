@@ -1,6 +1,6 @@
 package Polymorphism;
 
-public class HybridCar extends Car {
+public class HybridCar extends CarSuper {
     private double avgKmPerLiter;
 
     private int cylinders;

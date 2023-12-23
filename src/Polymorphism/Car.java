@@ -2,26 +2,37 @@ package Polymorphism;
 
 public class Car {
 
-    private String description;
+    private boolean engine;
 
-    public Car(String description) {
-        this.description = description;
+    private int cylinders;
+
+    private String name;
+
+    private int wheels;
+
+    public Car(int cylinders, String name) {
+        this.cylinders = cylinders;
+        this.name = name;
+        this.engine = true;
+        this.wheels = 4;
+    }
+
+    public int getCylinders() {
+        return cylinders;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void startEngine() {
-        System.out.println("Car -> startEngine");
+        System.out.println("Car -> startEngine()");
     }
 
-    protected void runEngine() {
-        System.out.println("Car -> runEngine");
+    public void accelerate() {
+        System.out.println("Car -> accelerate()");
     }
-
-    public void drive() {
-        System.out.println("Car -> driving, type is " + getClass().getSimpleName());
-        runEngine();
-    }
-
-    public static Car makeCar(String description) {
-        return new Car(description);
+    public void brake() {
+        System.out.println("Car -> brake()");
     }
 }

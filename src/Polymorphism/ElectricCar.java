@@ -1,6 +1,6 @@
 package Polymorphism;
 
-public class ElectricCar extends Car {
+public class ElectricCar extends CarSuper {
     private double avgKmPerCharge;
     private int batterySize;
 

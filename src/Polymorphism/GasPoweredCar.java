@@ -1,6 +1,6 @@
 package Polymorphism;
 
-public class GasPoweredCar extends Car {
+public class GasPoweredCar extends CarSuper {
     private double avgKmPerLitre;
     private int cylinders;
 
