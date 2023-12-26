@@ -1,0 +1,26 @@
+Order
+    Item side
+    Item drink
+    Burger burger
+    -------------
+    addToppings()
+    setDrinkSize()
+    printItemizedList()
+    printTotal()
+
+Item
+    String type
+    String name
+    double price
+    String size
+    ------------
+    double getBasePrice()
+    double getAdjustedPrice()
+    printItem()
+
+Burger extends Item
+    Item extra1
+    Item extra2
+    Item extra3
+    -------------
+    addToppings()
