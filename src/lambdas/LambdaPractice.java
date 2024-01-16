@@ -1,0 +1,67 @@
+package lambdas;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+
+public class LambdaPractice {
+
+    record Person (String firstName, String lastName) {
+        @Override
+        public String toString() {
+            return firstName + " " + lastName;
+        }
+    }
+
+    public static void main(String[] args) {
+
+        List<Person> people = new ArrayList<>(Arrays.asList(
+                new Person("Lucy", "Van Pelt"),
+                new Person("Sally", "Brown"),
+                new Person("Linus", "Van Pelt"),
+                new Person("Peppermint", "Patty"),
+                new Person("Charlie", "Brown")));
+
+        //using anonymous class
+        var comparatorLastName = new Comparator<Person>() {
+            @Override
+            public int compare(Person o1, Person o2) {
+                return o1.lastName.compareTo(o2.lastName);
+            }
+        };
+
+        people.sort(comparatorLastName);
+        System.out.println(people);
+
+        //using lambda
+        people.sort(((o1, o2) -> o1.lastName.compareTo(o2.lastName))); //JDK understands this as sort accepts an instance of Comparator, and Comparator has only one method
+        System.out.println(people);
+
+        //using Comparator.comparing
+        people.sort((Comparator.comparing(o -> o.lastName)));
+        System.out.println(people);
+
+
+        interface EnhancedComparator<T> extends Comparator<T> {
+            int secondLevel(T o1, T o2);
+        }
+
+        var twoLevelComparator = new EnhancedComparator<Person>() {
+            @Override
+            public int compare(Person o1, Person o2) {
+                int result = o1.lastName.compareTo(o2.lastName);
+                return result == 0 ? secondLevel(o1, o2) : result;
+            }
+
+            @Override
+            public int secondLevel(Person o1, Person o2) {
+                return o1.firstName.compareTo(o2.firstName);
+            }
+        };
+
+        people.sort(twoLevelComparator);
+        System.out.println(people);
+
+    }
+}
